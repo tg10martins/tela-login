@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
+// ALTERAÇÃO FEITA EM CASA
+
 // Load Config
 dotenv.config({ path: './config/config.env' });
 
