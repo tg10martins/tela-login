@@ -30,7 +30,7 @@ user.post('/register', async (req, res) => {
     if (savedUser) {
         console.log(savedUser);
         res.json({ message: "Obrigado pelo cadastro!" })
-    }
+    } 
 
 
 });
