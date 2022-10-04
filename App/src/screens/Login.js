@@ -6,8 +6,8 @@ import CustomButton from "../components/CustomButton";
 
 
 const Login = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('eduardo@gmail.com');
+    const [password, setPassword] = useState('123456');
 
     const onLoginPressed = () => {
         alert("Logged in with User " + email + " and " + password)
@@ -33,7 +33,7 @@ const Login = ({ navigation }) => {
                 placeholder="Password"
                 value={password}
                 setValue={setPassword}
-                secureTextEntry={true}
+                secureTextEntry={false}
             />
 
             <CustomButton text="Login" onPress={onLoginPressed} />
