@@ -1,31 +1,25 @@
 import { View, Text, StyleSheet, Button } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Teste from '../components/Teste'
 import { Context, Provider } from '../context/dataContext'
 
 const Home = () => {
-  const actualState = useContext(Context)
+  const [counter, setCounter] = useState(0);
+  useEffect(() => {
+    document.title = counter
+  }, [counter])
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Home</Text>
-      <Text style={styles.text}>
-        {actualState.state.counter}
-      </Text>
+      <h1> {counter} </h1>
       <Button 
-        title="Aumentar" 
-        onPress={() => actualState.dispatch({type:"aumentar", payload:10})} 
-      />
-      { actualState.state.showMessage ? <Text>Mensagem Secreta</Text> : null }
-      <Button 
-        title="Mostrar" 
-        onPress={() => actualState.dispatch({type:"mostrar", payload: true})}
+        title='Aumentar' 
+        onPress={() => setCounter(counter + 1)}
       />
       <Button 
-        style={styles.baton}
-        title="Esconder" 
-        onPress={() => actualState.dispatch({type:"esconder", payload: false})}
+        title='Zerar' 
+        onPress={() => setCounter(0)}
       />
-  
     </View>
   )
 }
