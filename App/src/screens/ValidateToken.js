@@ -12,13 +12,24 @@ const ValidateToken = ({ navigation }) => {
             const validateToken = async () => {
                 const token = await AsyncStorage.getItem("token");
                 if (token) {
-                    navigation.navigate("Home");
+                    try {
+                        const data = await api.get('/user', {
+                            headers: {
+                                token: token
+                            }
+                        });
+                        console.log(data);
+                        navigation.navigate("Home");
+                    } catch (error) {
+                        console.log(error)
+                        navigation.navigate("Login");
+                    }  
                 } else {
                     navigation.navigate("Login");
                 }
             };
             validateToken();
-        }, 2000);
+        }, 1000);
     }, []);
 
 

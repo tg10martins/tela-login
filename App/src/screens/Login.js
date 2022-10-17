@@ -3,14 +3,31 @@ import React, { useState } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../api';
 
 const Login = ({ navigation }) => {
-    const [email, setEmail] = useState('eduardo@gmail.com');
-    const [password, setPassword] = useState('123456');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const onLoginPressed = () => {
-        alert("Logged in with User " + email + " and " + password)
+    const onLoginPressed = async () => {
+        try {
+            const authData = await api.post('/login', {
+                email: email,
+                password: password
+            })
+            console.log(authData)
+            if(authData.status === 200){
+                await AsyncStorage.setItem('token', authData.data.token)
+                navigation.navigate("Home")
+            } else {
+                alert('Email ou Senha Inválidos')
+                setPassword('')
+            }
+        } catch (error) {
+            alert('Email ou Senha Inválidos')
+            setPassword('')
+        }
     }
 
     const { height } = useWindowDimensions();
