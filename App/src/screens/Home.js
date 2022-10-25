@@ -5,13 +5,11 @@ import { Context, Provider } from '../context/dataContext'
 
 const Home = () => {
   const [counter, setCounter] = useState(0);
-  useEffect(() => {
-    document.title = counter
-  }, [counter])
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Home</Text>
-      <h1> {counter} </h1>
+      <Text> {counter} </Text>
       <Button 
         title='Aumentar' 
         onPress={() => setCounter(counter + 1)}

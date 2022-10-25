@@ -29,7 +29,7 @@ const ValidateToken = ({ navigation }) => {
                 }
             };
             validateToken();
-        }, 1000);
+        }, 500);
     }, []);
 
 
