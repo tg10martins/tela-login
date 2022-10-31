@@ -34,7 +34,8 @@ login.post('/', async (req, res) => {
         // PAYLOAD: o que será armazenado no TOKEN
         {
             id: registeredUser.id,
-            email: registeredUser.email
+            name: registeredUser.name,
+            admin: registeredUser.admin
         }, 
         // Secret or Private Key
         process.env.JWT_SECRET,

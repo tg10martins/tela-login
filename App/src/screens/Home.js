@@ -1,11 +1,10 @@
 import { View, Text, StyleSheet, Button } from 'react-native'
-import React, { useContext, useEffect, useState } from 'react'
-import Teste from '../components/Teste'
-import { Context, Provider } from '../context/dataContext'
+import React, { useContext, useState } from 'react'
+import { Context } from '../context/authContext'
 
 const Home = () => {
   const [counter, setCounter] = useState(0);
-
+  const { dispatch } = useContext(Context);
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Home</Text>
@@ -16,7 +15,7 @@ const Home = () => {
       />
       <Button 
         title='Zerar' 
-        onPress={() => setCounter(0)}
+        onPress={() => dispatch({ type: 'logOut' })}
       />
     </View>
   )
@@ -33,10 +32,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default () => {
-  return (
-    <Provider>
-      <Home />
-    </Provider>
-  )
-}
+export default Home;
