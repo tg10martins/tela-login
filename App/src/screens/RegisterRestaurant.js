@@ -1,5 +1,4 @@
-import { StyleSheet, View, Image, useWindowDimensions } from "react-native";
-import { Picker } from '@react-native-picker/picker';
+import { StyleSheet, View, Image, useWindowDimensions, Picker } from "react-native";
 import React, { useState } from 'react';
 import Logo from '../../assets/images/Logo.png';
 import CustomInput from "../components/CustomInput";
