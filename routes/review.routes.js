@@ -32,7 +32,9 @@ review.post("/register", async (req, res) => {
 
 review.get('/findByRestaurant', async (req, res) => {
     const idRestaurant = req.body.idRestaurant;
-    const reviews = await Review.findAll().catch(
+    const reviews = await Review.findAll(
+        {where: {idRestaurant}}
+    ).catch(
         (err) => {
             console.log(err)
         }
@@ -47,7 +49,9 @@ review.get('/findByRestaurant', async (req, res) => {
 
 review.get('/findByUser', async (req, res) => {
     const idUser = req.body.idUser;
-    const reviews = await Review.findAll().catch(
+    const reviews = await Review.findAll(
+        {where: {idUser}}
+    ).catch(
         (err) => {
             console.log(err)
         }

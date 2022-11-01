@@ -14,7 +14,7 @@ const Home = () => {
         onPress={() => setCounter(counter + 1)}
       />
       <Button 
-        title='Zerar' 
+        title='Logout' 
         onPress={() => dispatch({ type: 'logOut' })}
       />
     </View>

@@ -1,10 +1,11 @@
 import React, { useReducer } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 let initialState = {
     Loading: true,
     isLogged: false,
     name: '',
-    isAdmin: 'false',
+    isAdmin: false,
     token: '',
     idUser: '',
     idRestaurant: ''
@@ -15,6 +16,7 @@ const reducer = (state, action) => {
         case "logIn":
             return { ...state, isLogged: action.payload, Loading: false }
         case "logOut":
+            AsyncStorage.removeItem("token");
             return { ...state, isLogged: false }
         case "verify":
             return { ...state, isLogged: true, Loading: false, idUser: action.payload.id, isAdmin: action.payload.admin, name: action.payload.name }
