@@ -7,31 +7,28 @@ import api from '../api';
 
 const ValidateToken = ({ navigation }) => {
     const { state, dispatch } = useContext(Context);
-        setTimeout(() => {
-            if (state.isLogged) {
-                navigation.navigate('Home')
-            } else {
-                const validateToken = async () => {
-                    const token = await AsyncStorage.getItem("token");
-                    if (token) {
-                        try {
-                            const data = await api.get('/user', {
-                                headers: {
-                                    token: token
-                                }
-                            });
-                            dispatch({ type: 'verify', payload: data.data.authData})
-                        } catch (error) {
-                            console.log(error)
-                            dispatch({ type: 'logIn', payload: false })
+    setTimeout(() => {
+        const validateToken = async () => {
+            const token = await AsyncStorage.getItem("token");
+            if (token) {
+                try {
+                    const data = await api.get('/user', {
+                        headers: {
+                            token: token
                         }
-                    } else {
-                        dispatch({ type: 'logIn', payload: false })
-                    }
-                };
-                validateToken();
+                    });
+                    await dispatch({ type: 'verify', payload: data.data.authData })
+                    navigation.navigate("Routes")
+                } catch (error) {
+                    console.log(error)
+                    dispatch({ type: 'logIn', payload: false })
+                }
+            } else {
+                dispatch({ type: 'logIn', payload: false })
             }
-        }, 500);
+        };
+        validateToken();
+    }, 500);
 
     return (
         <View style={styles.container}>

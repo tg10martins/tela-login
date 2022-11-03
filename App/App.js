@@ -23,6 +23,7 @@ const App = () => {
         ) : (
           state.isLogged ? (
             <>
+              <Stack.Screen name="ValidateToken" component={ValidateToken} />
               <Stack.Screen name="Routes" component={Routes} />
             </>
           ) : (

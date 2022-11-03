@@ -6,7 +6,6 @@ let initialState = {
     isLogged: false,
     name: '',
     isAdmin: false,
-    token: '',
     idUser: '',
     idRestaurant: ''
 }
@@ -17,9 +16,22 @@ const reducer = (state, action) => {
             return { ...state, isLogged: action.payload, Loading: false }
         case "logOut":
             AsyncStorage.removeItem("token");
-            return { ...state, isLogged: false }
+            return { 
+                ...state, 
+                isLogged: false,
+                isAdmin: false
+            }
         case "verify":
-            return { ...state, isLogged: true, Loading: false, idUser: action.payload.id, isAdmin: action.payload.admin, name: action.payload.name }
+            return { 
+                ...state, 
+                isLogged: true, 
+                Loading: false, 
+                idUser: action.payload.id, 
+                isAdmin: action.payload.admin, 
+                name: action.payload.name,
+            }
+        case "setAdmin":
+            return { ...state, idRestaurant: action.payload }
         default:
             return state
     }

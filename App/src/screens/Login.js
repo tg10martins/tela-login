@@ -18,7 +18,6 @@ const Login = ({ navigation }) => {
                 email: email,
                 password: password
             })
-            console.log(authData)
             if(authData.status === 200){
                 await AsyncStorage.setItem('token', authData.data.token)
                 dispatch({type:'logIn', payload: true})
