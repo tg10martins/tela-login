@@ -1,11 +1,16 @@
-import { StyleSheet, View, Image, useWindowDimensions, Picker } from "react-native";
-import React, { useState } from 'react';
-import Logo from '../../assets/images/Logo.png';
-import CustomInput from "../components/CustomInput";
-import CustomButton from "../components/CustomButton";
-import api from '../api'
+import { StyleSheet, View, Image, useWindowDimensions } from "react-native";
+import React, { useState, useContext } from 'react';
+import Logo from '../../../assets/images/Logo.png';
+import CustomInput from "../../components/CustomInput";
+import CustomButton from "../../components/CustomButton";
+import api from '../../api'
+import { Context } from '../../context/authContext'
+import {Picker} from '@react-native-picker/picker';
 
 const RegisterRestaurant = ({ navigation }) => {
+
+    const { state, dispatch } = useContext(Context);
+
     const [name, setName] = useState('');
     const [type, setType] = useState('');
     const [description, setDescription] = useState('');
@@ -22,8 +27,12 @@ const RegisterRestaurant = ({ navigation }) => {
                 address: address,
             });
             if (authData.status === 200) {
-                console.log(authData.data.message)
-                navigation.navigate("RegisterRestaurant");
+                alert(authData.data.message)
+                setName("")
+                setType("")
+                setDescription("")
+                setAddress("")
+                dispatch({type: "update", payload: true})
             }
             else {
                 console.log(authData.data.message)
@@ -53,7 +62,7 @@ const RegisterRestaurant = ({ navigation }) => {
                 style={styles.picker}
                 onValueChange={setType}
             >
-                <Picker.Item label="Fast Food" value="Fast Food" />
+                <Picker.Item label="FastFood" value="FastFood" />
                 <Picker.Item label="Japanese" value="Japanese" />
                 <Picker.Item label="Italian" value="Italian" />
                 <Picker.Item label="French" value="French" />

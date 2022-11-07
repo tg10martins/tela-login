@@ -1,5 +1,7 @@
 import express from "express";
 import Review from '../models/Review.js';
+import Restaurant from '../models/Restaurant.js';
+import User from "../models/User.js";
 
 const review = express.Router();
 
@@ -31,37 +33,43 @@ review.post("/register", async (req, res) => {
 });
 
 review.get('/findByRestaurant', async (req, res) => {
-    const idRestaurant = req.body.idRestaurant;
-    const reviews = await Review.findAll(
-        {where: {idRestaurant}}
-    ).catch(
+    const idRestaurant = req.query.idRestaurant;
+    const reviews = await Review.findAll({
+        where: {
+            idRestaurant: idRestaurant
+        },
+        include: [{model: User}]
+    }).catch(
         (err) => {
             console.log(err)
         }
     );
 
-    if (reviews){
-        return res.json({reviews})
+    if (reviews) {
+        return res.json({ reviews })
     } else {
         return null
     }
 })
 
 review.get('/findByUser', async (req, res) => {
-    const idUser = req.body.idUser;
-    const reviews = await Review.findAll(
-        {where: {idUser}}
-    ).catch(
+    const idUser = req.query.idUser;
+    const reviews = await Review.findAll({
+        where: {
+            idUser: idUser
+        },
+        include: [{model: Restaurant}]
+    }).catch(
         (err) => {
             console.log(err)
         }
     );
 
-    if (reviews){
-        return res.json({reviews})
+    if (reviews) {
+        return res.json({ reviews })
     } else {
         return null
     }
 })
 
-export default review;
+export default review;  

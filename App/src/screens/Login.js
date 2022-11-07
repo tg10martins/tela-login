@@ -51,7 +51,7 @@ const Login = ({ navigation }) => {
                 placeholder="Password"
                 value={password}
                 setValue={setPassword}
-                secureTextEntry={false}
+                secureTextEntry={true}
             />
 
             <CustomButton text="Login" onPress={onLoginPressed} />
