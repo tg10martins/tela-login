@@ -26,8 +26,8 @@ const Routes = ({ navigation }) => {
                 />
             )            
         }} >
-            <Tab.Screen
-                name="Home"
+           <Tab.Screen
+                name="Tela Inicial"
                 component={Home}
                 options={{
                     tabBarIcon: () => (
@@ -35,6 +35,7 @@ const Routes = ({ navigation }) => {
                     ),
                 }}
             />
+              {/*
             <Tab.Screen
                 name="Restaurants"
                 component={RestaurantRoutes}
@@ -67,7 +68,7 @@ const Routes = ({ navigation }) => {
             ) : (
                 <></>
             )
-            }
+            } */}
 
         </Tab.Navigator>
     )
